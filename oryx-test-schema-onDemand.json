@@ -1,0 +1,29 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Oryx - UAE  Oil Production Data and Prediction",
+    "version": "1.0.0",
+    "description": "Oryx is the UAE’s oil expert. The name comes from the UAE’s national animal, the Oryx, and we used it to refer to the UAE’s most resourceful asset, oil. It is our proprietary prediction AI model that we built on our local servers to predict the UAE’s oil demand in the next X years. It can also be used to query about factors affecting oil demand from the past 50 years (1971-2024). We intend to integrate Oryx with On-demand through an accessible plugin that government entities and businesses can easily use."
+  },
+  "servers": [
+    {
+      "url": "https://9da9-5-195-74-112.ngrok-free.app"
+    }
+  ],
+  "paths": {
+    "/get_year_data": {
+      "post": {
+        "operationId": "getHistoricalOilProductionByYear",
+        "description": "Takes the year and returns historical oil production data of UAE",
+        "parameters": [
+            {
+              "name": "year",
+              "in": "body",
+              "description": "Calender year that the user inputs.",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "default": "2000"
+              }
+            },
+        ]
