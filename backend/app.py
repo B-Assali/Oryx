@@ -74,7 +74,7 @@ def predict_production():
     predictions_list = prediction.tolist()
 
     # Return the prediction
-    return jsonify({"prediction": predictions_list}), 200
+    return jsonify({"predicted_oil_barrels_per_day_to_be_produced": predictions_list[0]*1000}), 200
 
 
 if __name__ == '__main__':
