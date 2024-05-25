@@ -27,7 +27,7 @@
             <div class="enter-prompt">Enter a prompt?</div>
 
             <!-- History box --> 
-            <div class="chat-container">
+            <!--<div class="chat-container">
                 <div class="side-box">
                 <div class="history-title">History</div>
                 <ul class="history-list">
@@ -36,14 +36,21 @@
                 </ul>
                 <button class="clear-button">Clear</button>
                 </div>
-            </div>
+            </div>-->
 
+            <div class="message-container"> 
+                <div class="message-display">
+                    <!--<div class="you-message"></div>  Display "You: " prefix on a separate line -->
+                    <div class="user-message"></div> <!-- Display the user's message here -->
+                    <div class="bot-reply"></div> <!-- Added to display bot's response -->
+                </div> 
+            </div>
             <!-- Chat box --> 
             <div class="chat-box">
                 <textarea class="chat-input" placeholder="Message"></textarea>
                 <button class="send-button"><img src="images/arrow.png" alt="Send"></button>
             </div>
-
+            <script src="userInput.js"></script> <!-- Link to the external JavaScript file -->
         </main>
     </body>
 
