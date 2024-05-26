@@ -116,9 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('No response message received from the API');
                 }
 
-                // Set content for the bot reply element
-                botReplyDiv.textContent = botMessage;
 
+                // Assuming units are part of the answer
+                const units = data.chatMessage.units; // Adjust this line based on actual response structure
+
+                // Set content for the bot reply element
+                botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
+
+                
                 // Append the bot reply to the message display area
                 messageDisplay.appendChild(botReplyDiv);
 
