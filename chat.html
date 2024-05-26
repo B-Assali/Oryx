@@ -24,7 +24,11 @@
     <body>
         <main>
             <!-- Enter prompt text--> 
-            <div class="enter-prompt">Enter a prompt?</div>
+            <div class="prompt-container">
+                <div class="enter-prompt">Enter a prompt?</div>
+                <button class="reset-button"><img src="images/refresh.png" alt="Reset"></button> <!-- Added reset button -->
+            </div>
+
 
             <!-- History box --> 
             <!--<div class="chat-container">
@@ -38,6 +42,7 @@
                 </div>
             </div>-->
 
+            <!-- Space for message -->
             <div class="message-container"> 
                 <div class="message-display">
                     <!--<div class="you-message"></div>  Display "You: " prefix on a separate line -->
@@ -45,6 +50,7 @@
                     <div class="bot-reply"></div> <!-- Added to display bot's response -->
                 </div> 
             </div>
+
             <!-- Chat box --> 
             <div class="chat-box">
                 <textarea class="chat-input" placeholder="Message"></textarea>
