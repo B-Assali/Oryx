@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     let sessionId = null; // Global variable to store the session ID
-
+    
     // Function to create a new chat session
     function createChatSession() {
         const myHeaders = new Headers();
@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
                 messageDisplay.appendChild(botReplyDiv);
             });
+        });
+        // Add event listener for the reset button to clear messages
+        document.querySelector('.reset-button').addEventListener('click', function() {
+            const messageDisplay = document.querySelector('.message-display');
+            messageDisplay.innerHTML = ''; // Clear all messages
         });
     }).catch(error => {
         console.error('Error during session creation:', error);
