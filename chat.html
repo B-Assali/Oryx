@@ -8,39 +8,22 @@
     <title>Oryx</title>
 </head>
 
-<div class ="body-section">
-    <!-- Header Section: includes logo + FAQ --> 
-    <header>
-        <div class="logo-container">
-            <a href="index.html">
-            <img src="images/logo.png" alt="Oryx logo">
-            </a>
-        </div>
-        <div class="faq-container">
-            <p class="faq-text">FAQ</p>
-        </div>
-    </header>
-
-    <body>
-        <main>
-            <!-- Enter prompt text--> 
-            <div class="prompt-container">
-                <div class="enter-prompt">Enter a prompt?</div>
-                <button class="reset-button"><img src="images/refresh.png" alt="Reset"></button> <!-- Added reset button -->
+<body>
+    <div class ="body-section">
+        <!-- Header Section: includes logo + FAQ --> 
+        <header>
+            <div class="logo-container">
+                <a href="index.html">
+                <img src="images/logo.png" alt="Oryx logo">
+                </a>
             </div>
+            <div class="enter-prompt">Enter a prompt..</div>
+            <button class="reset-button"><img src="images/refresh.png" alt="Reset"></button> <!-- Added reset button -->
 
 
-            <!-- History box --> 
-            <!--<div class="chat-container">
-                <div class="side-box">
-                <div class="history-title">History</div>
-                <ul class="history-list">
-                    <li>What is the UAE's oil demand for 2002?</li>
-                    <li>Give me a prediction of the UAE's oil export for the year 2025?</li>
-                </ul>
-                <button class="clear-button">Clear</button>
-                </div>
-            </div>-->
+        </header>
+
+        <main>
 
             <!-- Space for message -->
             <div class="message-container"> 
@@ -53,21 +36,24 @@
 
             <!-- Chat box --> 
             <div class="chat-box">
+                <div class="autocomplete-suggestions"></div>
+
                 <textarea class="chat-input" placeholder="Message"></textarea>
                 <button class="send-button"><img src="images/arrow.png" alt="Send"></button>
             </div>
             <script src="ondemand.js"></script> <!-- Link to the external JavaScript file -->
         </main>
-    </body>
 
-    <footer>
-        <div class="social">
-            <div class="left"> Oryx.com </div>
-            <div class="right">
-                <img src="images/Social_icons/facebook.png" alt="Image">
-                <img src="images/Social_icons/youtube.png" alt="Image">
-                <img src="images/Social_icons/insta.png" alt="Image">
+        <footer>
+            <div class="social">
+                <div class="left"> Oryx.com </div>
+                <div class="right">
+                    <img src="images/Social_icons/facebook.png" alt="Image">
+                    <img src="images/Social_icons/youtube.png" alt="Image">
+                    <img src="images/Social_icons/insta.png" alt="Image">
+                </div>
             </div>
-        </div>
-    </footer>
-</div>
+        </footer>
+    </div>
+</body>
+</html>
