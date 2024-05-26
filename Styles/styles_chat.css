@@ -1,27 +1,12 @@
-/* Chat container styles */
-.prompt-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.enter-prompt{
-  font-size: 35px;
-  font-weight: 600; /* Bold */
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
 .reset-button {
   width: 50px;  /*Adjust the width as needed*/
   height: 50px; /* Adjust the height as needed */
   cursor: pointer;
   background-color: gainsboro;
   box-shadow: none;
-
-
+  margin-right: 60px;
 }
+
 .reset-button img {
   width: 30px; /* Adjust the width as needed */
   vertical-align: middle; /* Aligns the image vertically */
@@ -30,18 +15,24 @@
 
 .chat-container {
     display: flex;
-    padding: 60px;
+    padding: 10px;
     justify-content: flex-end;
   }
 
-  /* Side box styles */
-  .side-box {
-    width: 300px;
-    background-color: white;
-    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.5); /* Added box-shadow */
-    padding: 30px;
-    border-radius: 10px;
-  }
+/* Update the side box position to start after the logo */
+.side-box {
+  width: 300px;
+  background-color: white;
+  box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.5); /* Added box-shadow */
+  padding: 30px;
+  border-radius: 10px;
+  position: absolute;
+  left: 300px; /* Adjust based on the width of the logo */
+  top: 0;
+  bottom: 0;
+}
+
+
 
   .history-title {
     font-size: 32px;
@@ -70,11 +61,14 @@
     cursor: pointer;
   }
 
-  .message-container {
-    min-height: 250px;
-    max-height: 250px; /* Set a maximum height for the container */
-    overflow-y: auto; /* Allow vertical scrollbar when content exceeds container height */
+/* Message container styles */
+.message-container {
+  min-height: 170px; /* Adjust the height as needed */
+  max-height: 170px; /* Adjust the height as needed */
+  overflow-y: auto; /* Allow vertical scrollbar when content exceeds container height */
+  margin-bottom: 10px; /* Add margin bottom to create space between message container and chat box */
 }
+
 /* Displat User input*/
   .message-display {
     /*border-radius: 8px;
@@ -105,7 +99,7 @@
     position: relative;
     display: flex;
     align-items: center; 
-    padding: 20px;
+    padding: 10px;
   }
   
 .chat-input {
@@ -133,4 +127,54 @@
     width: 30px; /* Adjust the width as needed */
     vertical-align: middle; /* Aligns the image vertically */
   }
+
+  
+
+  /* Autocomplete suggestions styles */
+.autocomplete-suggestions {
+  border: 1px solid #ccc;
+  max-height: 100px;
+  overflow-y: auto;
+  position: absolute;
+  top: calc(100% - 10px); /* Position above the input field */
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1; /* Ensure suggestions appear above other elements */
+}
+
+.autocomplete-suggestion {
+  padding: 5px;
+  cursor: pointer;
+}
+.autocomplete-suggestion:hover {
+  background-color: #eee;
+}
+
+
+
+/* Update the logo container to be positioned relative */
+.logo-container {
+  position: relative;
+}
+
+
+
+/* Chat container styles */
+.prompt-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align items and space between */
+  padding: 10px;
+  position: fixed; /* Fixed position to keep it at the top */
+  width: 100%; /* Full width */
+  background-color: #f8f8f8; /* Background color */
+  z-index: 999; /* Ensure it's above other content */
+}
+
+.enter-prompt {
+  font-size: 40px;
+  font-weight: bold;
+  margin-right: 600px;
+}
 
