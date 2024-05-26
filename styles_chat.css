@@ -1,9 +1,32 @@
 /* Chat container styles */
-.enter-prompt{
-    font-size: 35px;
-    font-weight: 600; /* Bold */
-    margin-bottom: 10px;
+.prompt-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
+
+.enter-prompt{
+  font-size: 35px;
+  font-weight: 600; /* Bold */
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.reset-button {
+  width: 50px;  /*Adjust the width as needed*/
+  height: 50px; /* Adjust the height as needed */
+  cursor: pointer;
+  background-color: gainsboro;
+  box-shadow: none;
+
+
+}
+.reset-button img {
+  width: 30px; /* Adjust the width as needed */
+  vertical-align: middle; /* Aligns the image vertically */
+}
+
 
 .chat-container {
     display: flex;
@@ -52,7 +75,7 @@
     max-height: 250px; /* Set a maximum height for the container */
     overflow-y: auto; /* Allow vertical scrollbar when content exceeds container height */
 }
-/* Display User input*/
+/* Displat User input*/
   .message-display {
     /*border-radius: 8px;
     border: 1px solid #ccc;
@@ -110,3 +133,4 @@
     width: 30px; /* Adjust the width as needed */
     vertical-align: middle; /* Aligns the image vertically */
   }
+
