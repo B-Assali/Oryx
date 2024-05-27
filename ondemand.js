@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "oil production": "thousand barrels per day",
         "oil consumption": "terawatt-hours (TWh)",
         "imports": "barrels per day",
-        "exports": "million barrels per day", // Corrected key
+        "exports": "million barrels per day",
         "population": "number of people",
         "immigration": "number of people",
         "GDP per capita": "$",
@@ -38,77 +38,74 @@ document.addEventListener('DOMContentLoaded', function() {
         "average energy consumption per capita": "kilowatt-hours (kWh)",
         "annual change in primary energy consumption": "%",
         "oil reserves": "billion tonnes"
-      };
-      
+    };
 
     // Function to create a new chat session
     function createChatSession() {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("apikey", "pZ1FjP5i9u5xmmH8BLwdEcSJ7tpBANuG");
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("apikey", "pZ1FjP5i9u5xmmH8BLwdEcSJ7tpBANuG");
 
-      const raw = JSON.stringify({
-        "pluginIds": [],
-        "externalUserId": "1234"
-      });
-
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-      };
-
-      return fetch("https://gateway-dev.on-demand.io/chat/v1/sessions", requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            return response.text().then(text => { throw new Error(text) });
-          }
-          return response.json();
-        })
-        .then((result) => {
-          console.log('Chat Session Created:', result); // Log the response
-          sessionId = result.chatSession.id; // Store the session ID
-          console.log('Session ID:', sessionId); // Log the session ID
-        })
-        .catch((error) => {
-          console.error('Error creating chat session:', error); // Log the error
+        const raw = JSON.stringify({
+            "pluginIds": [],
+            "externalUserId": "1234"
         });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        return fetch("https://gateway-dev.on-demand.io/chat/v1/sessions", requestOptions)
+            .then((response) => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.json();
+            })
+            .then((result) => {
+                console.log('Chat Session Created:', result); // Log the response
+                sessionId = result.chatSession.id; // Store the session ID
+                console.log('Session ID:', sessionId); // Log the session ID
+            })
+            .catch((error) => {
+                console.error('Error creating chat session:', error); // Log the error
+            });
     }
 
     // Function to update autocomplete suggestions
     function updateAutocompleteSuggestions(input) {
-      const suggestionsContainer = document.querySelector('.autocomplete-suggestions');
-      suggestionsContainer.innerHTML = ''; // Clear existing suggestions
+        const suggestionsContainer = document.querySelector('.autocomplete-suggestions');
+        suggestionsContainer.innerHTML = ''; // Clear existing suggestions
 
-      if (!input) return;
+        if (!input) return;
 
-      const filteredQuestions = commonQuestions.filter(question =>
-        question.toLowerCase().includes(input.toLowerCase())
-      );
+        const filteredQuestions = commonQuestions.filter(question =>
+            question.toLowerCase().includes(input.toLowerCase())
+        );
 
-      filteredQuestions.forEach(question => {
-        const suggestionDiv = document.createElement('div');
-        suggestionDiv.classList.add('autocomplete-suggestion');
-        suggestionDiv.textContent = question;
-        suggestionDiv.addEventListener('click', () => {
-          document.querySelector('.chat-input').value = question;
-          suggestionsContainer.innerHTML = ''; // Clear suggestions after selecting
+        filteredQuestions.forEach(question => {
+            const suggestionDiv = document.createElement('div');
+            suggestionDiv.classList.add('autocomplete-suggestion');
+            suggestionDiv.textContent = question;
+            suggestionDiv.addEventListener('click', () => {
+                document.querySelector('.chat-input').value = question;
+                suggestionsContainer.innerHTML = ''; // Clear suggestions after selecting
+            });
+            suggestionsContainer.appendChild(suggestionDiv);
         });
-        suggestionsContainer.appendChild(suggestionDiv);
-      });
     }
 
-    // Create a chat session when the page loads
-    createChatSession().then(() => {
-      document.querySelector('.send-button').addEventListener('click', function() {
-        // Get the user input
+    // Function to send a message
+    function sendMessage() {
         const userInput = document.querySelector('.chat-input').value;
 
         // Make sure there's input to send
         if (!userInput) {
-          alert('Please enter a message.');
-          return;
+            alert('Please enter a message.');
+            return;
         }
 
         // Create new HTML elements for user input and bot reply
@@ -135,10 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Ensure sessionId is available before sending the query
         if (!sessionId) {
-          console.error('Session ID is not available.');
-          botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
-          messageDisplay.appendChild(botReplyDiv);
-          return;
+            console.error('Session ID is not available.');
+            botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
+            messageDisplay.appendChild(botReplyDiv);
+            return;
         }
 
         // Step 2: Answer Query API
@@ -147,73 +144,92 @@ document.addEventListener('DOMContentLoaded', function() {
         myHeaders.append("Content-Type", "application/json");
 
         const raw = JSON.stringify({
-          "endpointId": "predefined-openai-gpt4o",
-          "query": userInput,
-          "pluginIds": [
-            "plugin-1716030024"
-          ],
-          "responseMode": "sync"
+            "endpointId": "predefined-openai-gpt4o",
+            "query": userInput,
+            "pluginIds": [
+                "plugin-1716030024"
+            ],
+            "responseMode": "sync"
         });
 
         const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow"
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
         };
 
         fetch(`https://gateway-dev.on-demand.io/chat/v1/sessions/${sessionId}/query`, requestOptions)
-          .then(response => {
-            if (!response.ok) {
-              return response.text().then(text => { throw new Error(text) });
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Query Response:', data); // Log the full response
+
+                // Extract the response message from the API
+                const botMessage = data.chatMessage && data.chatMessage.answer;
+
+                if (!botMessage) {
+                    throw new Error('No response message received from the API');
+                }
+
+                // Find the unit for the query, if any
+                const queryFactor = Object.keys(unitsMap).find(factor =>
+                    userInput.toLowerCase().includes(factor.toLowerCase())
+                );
+
+                const units = unitsMap[queryFactor] || '';
+
+                // Set content for the bot reply element
+                botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
+
+                // Append the bot reply to the message display area
+                messageDisplay.appendChild(botReplyDiv);
+
+                // Scroll to the bottom of the message container again to show the new message
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error); // Log the error to the console for debugging
+                botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
+                messageDisplay.appendChild(botReplyDiv);
+
+                // Scroll to the bottom of the message container to show the error message
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            });
+    }
+
+    // Create a chat session when the page loads
+    createChatSession().then(() => {
+        const sendButton = document.querySelector('.send-button');
+        const chatInput = document.querySelector('.chat-input');
+
+        // Add event listener for the send button
+        sendButton.addEventListener('click', sendMessage);
+
+        // Add event listener for the Enter key
+        chatInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default behavior of newline
+                sendMessage();
             }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Query Response:', data); // Log the full response
+        });
 
-            // Extract the response message from the API
-            const botMessage = data.chatMessage && data.chatMessage.answer;
-
-            if (!botMessage) {
-              throw new Error('No response message received from the API');
-            }
-
-            // Find the unit for the query, if any
-            const queryFactor = Object.keys(unitsMap).find(factor => 
-              userInput.toLowerCase().includes(factor.toLowerCase())
-            );
-
-            const units = unitsMap[queryFactor] || '';
-
-            // Set content for the bot reply element
-            botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
-
-            // Append the bot reply to the message display area
-            messageDisplay.appendChild(botReplyDiv);
-
-            // Scroll to the bottom of the message container again to show the new message
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-          })
-          .catch(error => {
-            console.error('Error:', error); // Log the error to the console for debugging
-            botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
-            messageDisplay.appendChild(botReplyDiv);
-          });
-      });
-
-      // Add event listener for the reset button to clear messages
-      document.querySelector('.reset-button').addEventListener('click', function() {
-        const messageDisplay = document.querySelector('.message-display');
-        messageDisplay.innerHTML = ''; // Clear all messages
+        // Add event listener for the reset button to clear messages
+        document.querySelector('.reset-button').addEventListener('click', function() {
+            const messageDisplay = document.querySelector('.message-display');
+            messageDisplay.innerHTML = ''; // Clear all messages
             createChatSession(); // Create a new chat session
         });
 
         // Add event listener for input changes to show autocomplete suggestions
-        document.querySelector('.chat-input').addEventListener('input', function(event) {
+        chatInput.addEventListener('input', function(event) {
             updateAutocompleteSuggestions(event.target.value);
-          });
-        }).catch(error => {
-          console.error('Error during session creation:', error);
         });
-      });
+    }).catch(error => {
+        console.error('Error during session creation:', error);
+    });
+});
