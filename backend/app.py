@@ -3,6 +3,9 @@ import numpy as np
 import joblib
 from flask import Flask, request, jsonify
 import pickle
+# import sklearn
+# print(sklearn.__version__)
+
 
 app = Flask(__name__)  # flask instance
 
@@ -12,7 +15,7 @@ def get_year_data(filename, year):
     df = pd.read_csv(filename)
 
     # Filter the DataFrame for the specified year
-    year_data = df[df['Years'] == year]
+    year_data = df[df['Year'] == year]
 
     # Check if data for the specified year exists
     if year_data.empty:
@@ -65,7 +68,8 @@ def predict_production():
         return jsonify({"error": "Input year are missing"}), 400
 
     # Load your trained machine learning model
-    model = pickle.load(open('model_updated.pkl', 'rb'))  # model is in file
+    # model is in file
+    model = pickle.load(open('best_gb_model.pkl', 'rb'))
 
     # year_input = pd.read_json(year)
 
