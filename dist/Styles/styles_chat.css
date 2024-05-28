@@ -63,8 +63,8 @@
 
 /* Message container styles */
 .message-container {
-  min-height: 200px; /* Adjust the height as needed */
-  max-height: 200px; /* Adjust the height as needed */
+  min-height: 250px; /* Adjust the height as needed */
+  max-height: 250px; /* Adjust the height as needed */
   overflow-y: auto; /* Allow vertical scrollbar when content exceeds container height */
   margin-bottom: 10px; /* Add margin bottom to create space between message container and chat box */
 }
