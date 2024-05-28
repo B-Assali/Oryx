@@ -2,8 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     let sessionId = null; // Global variable to store the session ID
-    
-    // List of common questions related to oil production data
+    let selectedService = null; // Global variable to store the selected service
+
     const commonQuestions = [
       "What was the oil production amount in the UAE in 2002?",
       "What was the oil consumption in the UAE in 2002?",
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
       "What is the predicted oil demand in the UAE in 2030?"
     ];
 
-    // Units for specific factors
     const unitsMap = {
         "oil production": "thousand barrels per day",
         "oil consumption": "terawatt-hours (TWh)",
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         "oil reserves": "billion tonnes"
     };
 
-    // Function to create a new chat session
     function createChatSession() {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -77,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Function to update autocomplete suggestions
     function updateAutocompleteSuggestions(input) {
         const suggestionsContainer = document.querySelector('.autocomplete-suggestions');
         suggestionsContainer.innerHTML = ''; // Clear existing suggestions
@@ -100,39 +97,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to send a message
     function sendMessage() {
         const userInput = document.querySelector('.chat-input').value;
 
-        // Make sure there's input to send
         if (!userInput) {
             alert('Please enter a message.');
             return;
         }
 
-        // Create new HTML elements for user input and bot reply
         const messageDisplay = document.querySelector('.message-display');
         const userMessageDiv = document.createElement('div');
         const botReplyDiv = document.createElement('div');
 
-        // Set classes for the new elements
         userMessageDiv.classList.add('user-message');
         botReplyDiv.classList.add('bot-reply');
 
-        // Set content for the new elements
         userMessageDiv.textContent = userInput;
-
-        // Append the new elements to the message display area
         messageDisplay.appendChild(userMessageDiv);
 
-        // Clear the input field after displaying the message
         document.querySelector('.chat-input').value = '';
 
-        // Scroll to the bottom of the message container
         const messageContainer = document.querySelector('.message-container');
         messageContainer.scrollTop = messageContainer.scrollHeight;
 
-        // Ensure sessionId is available before sending the query
         if (!sessionId) {
             console.error('Session ID is not available.');
             botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
@@ -140,7 +127,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Step 2: Answer Query API
+        let pluginIds = [];
+        if (selectedService === 'oil-production-predictor') {
+            pluginIds = ["plugin-1716030024"];
+        } else if (selectedService === 'uae-information-query') {
+            pluginIds = ["plugin-1713924030"];
+        }
+
         const myHeaders = new Headers();
         myHeaders.append("apikey", "pZ1FjP5i9u5xmmH8BLwdEcSJ7tpBANuG");
         myHeaders.append("Content-Type", "application/json");
@@ -148,9 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const raw = JSON.stringify({
             "endpointId": "predefined-openai-gpt4o",
             "query": userInput,
-            "pluginIds": [
-                "plugin-1716030024"
-            ],
+            "pluginIds": pluginIds,
             "responseMode": "sync"
         });
 
@@ -171,65 +162,74 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log('Query Response:', data); // Log the full response
 
-                // Extract the response message from the API
                 const botMessage = data.chatMessage && data.chatMessage.answer;
 
                 if (!botMessage) {
                     throw new Error('No response message received from the API');
                 }
 
-                // Find the unit for the query, if any
                 const queryFactor = Object.keys(unitsMap).find(factor =>
                     userInput.toLowerCase().includes(factor.toLowerCase())
                 );
 
                 const units = unitsMap[queryFactor] || '';
 
-                // Set content for the bot reply element
                 botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
-
-                // Append the bot reply to the message display area
                 messageDisplay.appendChild(botReplyDiv);
-
-                // Scroll to the bottom of the message container again to show the new message
                 messageContainer.scrollTop = messageContainer.scrollHeight;
             })
             .catch(error => {
-                console.error('Error:', error); // Log the error to the console for debugging
+                console.error('Error:', error);
                 botReplyDiv.textContent = 'Sorry, there was an error processing your request.';
                 messageDisplay.appendChild(botReplyDiv);
-
-                // Scroll to the bottom of the message container to show the error message
                 messageContainer.scrollTop = messageContainer.scrollHeight;
             });
     }
 
-    // Create a chat session when the page loads
     createChatSession().then(() => {
         const sendButton = document.querySelector('.send-button');
         const chatInput = document.querySelector('.chat-input');
 
-        // Add event listener for the send button
         sendButton.addEventListener('click', sendMessage);
 
-        // Add event listener for the Enter key
         chatInput.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent default behavior of newline
+                event.preventDefault();
                 sendMessage();
             }
         });
 
-        // Add event listener for the reset button to clear messages
         document.querySelector('.reset-button').addEventListener('click', function() {
             const messageDisplay = document.querySelector('.message-display');
-            messageDisplay.innerHTML = ''; // Clear all messages
-            createChatSession(); // Create a new chat session
+            messageDisplay.innerHTML = '';
+            createChatSession();
         });
 
-        // Add event listener for input changes to show autocomplete suggestions
         chatInput.addEventListener('input', function(event) {
             updateAutocompleteSuggestions(event.target.value);
+        });
+
+        document.getElementById('oil-production-predictor').addEventListener('click', function() {
+            selectedService = 'oil-production-predictor';
+            document.querySelector('.enter-prompt').textContent = 'Enter a prompt..';
+            document.querySelector('.service-selection').style.display = 'none';
+            document.querySelector('.message-container').style.display = 'block';
+            document.querySelector('.chat-box').style.display = 'flex';
+        });
+
+        document.getElementById('uae-information-query').addEventListener('click', function() {
+            selectedService = 'uae-information-query';
+            document.querySelector('.enter-prompt').textContent = 'Enter a prompt..';
+            document.querySelector('.service-selection').style.display = 'none';
+            document.querySelector('.message-container').style.display = 'block';
+            document.querySelector('.chat-box').style.display = 'flex';
+        });
+
+        document.querySelector('.back-button').addEventListener('click', function() {
+            document.querySelector('.service-selection').style.display = 'flex';
+            document.querySelector('.message-container').style.display = 'none';
+            document.querySelector('.chat-box').style.display = 'none';
+            document.querySelector('.enter-prompt').textContent = 'How can Oryx help you today?';
         });
     }).catch(error => {
         console.error('Error during session creation:', error);
