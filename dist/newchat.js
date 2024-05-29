@@ -230,6 +230,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.message-container').style.display = 'none';
             document.querySelector('.chat-box').style.display = 'none';
             document.querySelector('.enter-prompt').textContent = 'How can Oryx help you today?';
+            const messageDisplay = document.querySelector('.message-display');
+            messageDisplay.innerHTML = '';
+            createChatSession();
         });
     }).catch(error => {
         console.error('Error during session creation:', error);
