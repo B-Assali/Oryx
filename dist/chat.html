@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="header-buttons">
-                <button class="back-button">Back</button>
+                <button class="back-button" onclick="startNewSession()">Back</button>
                 <button class="reset-button"><img src="images/refresh.png" alt="Reset"></button>
             </div>
         </header>
@@ -28,20 +28,20 @@
             <!-- Service Selection -->
             <div class="service-selection">
                 <div class="service-box" id="oil-production-predictor">
-                    <h2>Oil Production Predictor and Query UAE database</h2>
-                    <p>Get predictions and trends for oil production and insights into factors affecting oil production in the UAE.</p>
+                    <h2>Oil Production Predictor</h2>
+                    <p>Get trends and insights for oil production in the UAE.</p>
                 </div>
                 <div class="service-box" id="uae-information-query">
-                    <h2>Get Latest Oil News and Stats!</h2>
-                    <p>Summarize the latest insights and news about oil production.</p>
+                    <h2>Oil News & Stats</h2>
+                    <p>Summarize the latest insights about oil production.</p>
                 </div>
             </div>
 
             <!-- Space for message -->
             <div class="message-container" style="display: none;"> 
                 <div class="message-display">
-                    <div class="user-message"></div> <!-- Display the user's message here -->
-                    <div class="bot-reply"></div> <!-- Added to display bot's response -->
+                    <div class="user-message"></div>
+                    <div class="bot-reply"></div>
                 </div> 
             </div>
 
@@ -51,16 +51,16 @@
                 <textarea class="chat-input" placeholder="Message"></textarea>
                 <button class="send-button"><img src="images/arrow.png" alt="Send"></button>
             </div>
-            <script src="newchat.js"></script> <!-- Link to the external JavaScript file -->
+            <script src="newchat.js"></script>
         </main>
 
         <footer>
             <div class="social">
                 <div class="left"> Oryx.com </div>
                 <div class="right">
-                    <img src="images/Social_icons/facebook.png" alt="Image">
-                    <img src="images/Social_icons/youtube.png" alt="Image">
-                    <img src="images/Social_icons/insta.png" alt="Image">
+                    <img src="images/Social_icons/facebook.png" alt="Facebook">
+                    <img src="images/Social_icons/youtube.png" alt="YouTube">
+                    <img src="images/Social_icons/insta.png" alt="Instagram">
                 </div>
             </div>
         </footer>
