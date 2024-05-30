@@ -40,12 +40,11 @@ header {
   align-items: center;
   width: 100%;
   background-color: white;
-  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
 }
 
-.logo-container {
+/* .logo-container {
   flex-grow: 1;
-}
+} */
 
 .header-buttons {
   display: flex;
@@ -54,11 +53,13 @@ header {
 }
 
 .enter-prompt {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 5px;
+  margin-left: -100px; /* Shift left */
   color: #333; /* Grey text color */
+  flex-grow: 1; /* Take up remaining space */
 }
 
 main {
@@ -91,11 +92,12 @@ main {
   margin-top: 0;
 }
 
-.service-box:hover,.back-button:hover   {
+.service-box:hover,.back-button:hover {
   background-color: #666666; /* Darker grey on hover */
   transition: background 0.3s;
 }
-.reset-button:hover, .send-button:hover{
+
+.reset-button:hover, .send-button:hover {
   background-color: #b9b9b9;
   transition: background 0.3s;
 }
@@ -124,8 +126,9 @@ main {
   min-height: 200px;
   max-height: 200px;
   overflow-y: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: none; /* Initially hidden */
+  margin-top: 1px; /*Move the container up */
 }
 
 .message-display {
@@ -134,31 +137,30 @@ main {
 }
 
 .user-message {
-  color: rgb(75, 75, 75); 
+  color: rgb(75, 75, 75);
   font-size: 16px;
   padding-bottom: 20px;
   text-align: right;
+  padding-right: 50px;
 }
 
 .bot-reply {
   padding-bottom: 20px;
-  color: black; 
+  color: black;
   font-size: 16px;
 }
 
 .chat-box {
   position: relative;
   display: flex;
-  align-items: center; 
+  align-items: center;
   padding: 10px;
   width: 800px;
-  /* max-width: 800px; */
   display: none; /* Initially hidden */
 }
 
 .chat-input {
   width: calc(100% - 50px);
-  margin-top: 80px;
   padding: 15px;
   padding-right: 50px;
   border-radius: 20px;
@@ -168,7 +170,7 @@ main {
 
 .send-button {
   position: absolute;
-  top: 63%;
+  top: 30%;
   right: 10px;
   width: 40px;
   height: 40px;
@@ -184,7 +186,6 @@ main {
 }
 
 .autocomplete-suggestions {
-  /*border: 1px solid rgb(255, 255, 255);*/
   border-radius: 8px;
   max-height: 100px;
   overflow-y: auto;
@@ -205,15 +206,13 @@ main {
   background-color: rgb(208, 208, 208);
 }
 
-
 @media (max-width: 600px) {
   .service-selection {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .service-box {
-      width: 90%;
+    width: 90%;
   }
 }
-
