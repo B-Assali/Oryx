@@ -5,20 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const questionsOilProduction = [
         "What was the oil production amount in the UAE in 2002?",
         "What was the oil consumption in the UAE in 2002?",
-        "What were the oil imports to the UAE in 2002?",
+        "What were the oil imports to the UAE in 2018?",
         "What were the oil exports from the UAE in 2002?",
-        "What was the population total in the UAE in 2002?",
+        "What was the population total in the UAE in 2019?",
         "What was the immigration rate in the UAE in 2002?",
         "What was the GDP per capita in the UAE in 2002?",
-        "What was the gross CO2 production in the UAE in 2002?",
-        "How many crude oil rigs were there in the UAE in 2002?",
-        "What was the CO2 emitted per year from oil extractions in the UAE in 2002?",
-        "What was the CO2 emitted per year from oil extractions around the world in 2002?",
-        "What was the yearly energy generation in the UAE in 2002?",
-        "What was the average energy consumption per capita in the UAE in 2002?",
-        "What was the annual change in primary energy consumption in the UAE in 2002?",
+        "What was the gross CO2 production in the UAE in 2017?",
+        "How many crude oil rigs were there in the UAE in 2004?",
+        "What was the CO2 emitted per year from oil extractions in the UAE in 2004?",
+        "What was the CO2 emitted per year from oil extractions around the world in 2003?",
+        "What was the yearly energy generation in the UAE in 2018?",
+        "What was the average energy consumption per capita in the UAE in 2003?",
+        "What was the annual change in primary energy consumption in the UAE in 2019?",
         "What were the oil reserves in the UAE in 2002?",
-        "What is the predicted oil demand in the UAE in 2030?"
+        "What is the predicted oil production in the UAE in 2030?"
     ];
 
     const questionsNews = [
