@@ -186,9 +186,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     userInput.toLowerCase().includes(factor.toLowerCase())
                 );
 
-                const units = unitsMap[queryFactor] || '';
 
-                botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
+                if (selectedService === 'oil-production-predictor') {
+                    const units = unitsMap[queryFactor] || '';
+                    botReplyDiv.textContent = botMessage + (units ? ` (${units})` : '');
+
+                } else if (selectedService === 'uae-information-query') {
+                    botReplyDiv.textContent = botMessage;
+                }
+
+
                 messageDisplay.appendChild(botReplyDiv);
                 messageContainer.scrollTop = messageContainer.scrollHeight;
             })
@@ -225,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('oil-production-predictor').addEventListener('click', function() {
             selectedService = 'oil-production-predictor';
-            document.querySelector('.enter-prompt').textContent = 'Enter a prompt..';
+            document.querySelector('.enter-prompt').innerHTML = 'Oil Production Predictor<br>Enter a prompt..';
             document.querySelector('.service-selection').style.display = 'none';
             document.querySelector('.message-container').style.display = 'block';
             document.querySelector('.chat-box').style.display = 'flex';
@@ -233,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('uae-information-query').addEventListener('click', function() {
             selectedService = 'uae-information-query';
-            document.querySelector('.enter-prompt').textContent = 'Enter a prompt..';
+            document.querySelector('.enter-prompt').innerHTML = 'Oil News & Stats<br>Enter a prompt..';
             document.querySelector('.service-selection').style.display = 'none';
             document.querySelector('.message-container').style.display = 'block';
             document.querySelector('.chat-box').style.display = 'flex';
